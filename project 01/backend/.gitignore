@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.env
+.env
+venv/
+ENV/
+.env.*
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints
+
+# Others
+*.sqlite3
+*.db
+*.bak
+*.swp
+*.swo
+
+# Node
+node_modules/
+
+# Build
+build/
+dist/
+
+# Backup
+*.bak
+
+# Test
+.coverage
+htmlcov/
+
+# Misc
+*.tmp
+*.orig
+
+# Ignore backend/app/readme.md backup
+backend/app/readme.md.bak

@@ -1,0 +1,89 @@
+i want to make a service jisme me 
+invoice upload karu or wo usme se mujhe data extract krke dede
+backend : fastapi
+db: postgres
+api: open ai 4o model to extract text from the invoice
+
+example
+ Extract the following fields 
+   - Invoice Date
+   - Invoice Number
+   - Customer Name
+   - Vendor Name
+   - Total Amount
+Extract all the item rows from the invoice table with these columns: 
+   - Item Description
+   - Quantity
+   - Unit Price
+   - Total Amount
+Return the result in a strict JSON format with the following structure: 
+
+
+
+
+------------------------------------------------------------------
+
+example
+{
+  "Invoice Number": "CN3-002254",
+  "Invoice Date": "27/02/2019",
+  "Customer Name": "RAJ DATA PROCESSORS",
+  "Vendor Name": "RAJ SUPER WHOLESALE BAZAR",
+  "Total Amount": "3473.00",
+  "Items": [
+    {
+      "Item Description": "SWADIST SOYA OIL 1LTR (POUCH)",
+      "Quantity": "10",
+      "Unit Price": "82.00",
+      "Total Amount": "820.00"
+    },
+    {
+      "Item Description": "BALAJI BASMATI RICE 1 KG",
+      "Quantity": "12",
+      "Unit Price": "48.00",
+      "Total Amount": "576.00"
+    },
+    {
+      "Item Description": "LIFEBUOY SOAP (LEMON) 125GM*4 94/-",
+      "Quantity": "12",
+      "Unit Price": "90.00",
+      "Total Amount": "1080.00"
+    },
+    {
+      "Item Description": "CAMEL TEA 500GM",
+      "Quantity": "6",
+      "Unit Price": "99.00",
+      "Total Amount": "594.00"
+    },
+    {
+      "Item Description": "DABUR HONEY 50GM 37/-",
+      "Quantity": "2",
+      "Unit Price": "36.00",
+      "Total Amount": "72.00"
+    },
+    {
+      "Item Description": "GOLD COIN BREAD 33/-",
+      "Quantity": "3",
+      "Unit Price": "30.00",
+      "Total Amount": "90.00"
+    },
+    {
+      "Item Description": "KISSAN TOMATO KETCHUP REFILL 450GM 50/-2ND",
+      "Quantity": "2",
+      "Unit Price": "48.00",
+      "Total Amount": "96.00"
+    },
+    {
+      "Item Description": "BRITANIA MUFFILLS CAKE 10/-",
+      "Quantity": "1",
+      "Unit Price": "10.00",
+      "Total Amount": "10.00"
+    },
+    {
+      "Item Description": "KHARAK SAKHARIYA (SPECIAL) 1KG",
+      "Quantity": "1",
+      "Unit Price": "135.00",
+      "Total Amount": "135.00"
+    }
+  ]
+}

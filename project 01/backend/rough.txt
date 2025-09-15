@@ -1,0 +1,122 @@
+backend/
+    app/
+        main.py                 # FastAPI app entry point
+        readme.md
+        api/                    # Routers (routes grouped by module)
+            __init__.py
+            v1/
+                __init__.py
+                users.py
+                auth.py
+        core/                   # Core app configuration
+            __init__.py
+            config.py           # Settings, env variables (pydantic BaseSettings)
+            security.py         # JWT, OAuth2, password hashing
+        db/
+            __init__.py
+            session.py          # Database session (SQLAlchemy)
+        models/                 # SQLAlchemy ORM models
+            __init__.py
+            user.py
+        repositories/           # Data access layer (CRUD)
+            __init__.py
+            user_repository.py
+        schemas/                # Pydantic models (request/response)
+            __init__.py
+            user_schema.py
+        services/               # Business logic
+            __init__.py
+            user_service.py
+        utils/                  # Helper utilities (email, file upload, etc.)
+            __init__.py
+        middlewares/            # Custom middlewares (logging, CORS, etc.)
+            __init__.py
+    migrations/                 # Alembic migrations
+        env.py
+        versions/
+    tests/                      # Unit & integration tests
+        __init__.py
+        test_users.py
+    scripts/                    # Automation / data seeding scripts
+        seed_db.py
+    docs/                       # Project or API documentation
+        api_overview.md
+
+
+
+
+-------------------------------------------------------------------------
+
+Client → API (router) → Service → Repository → Database
+                            ↓
+                         Schema
+
+
+=========================================================================
+
+python app/utils/recreate_db.py                           
+तो Python उस फाइल को standalone script मानता है।
+इसका मतलब है:
+
+recreate_db.py का __name__ == "__main__" होता है।
+
+Python इसे एक independent file समझता है, न कि package का हिस्सा।
+
+इस mode में absolute import (from app.models.base import Base) fail कर सकता है, क्योंकि Python को app नाम का package नहीं दिखता (CWD app/utils के आसपास है)।
+
+
+
+=============================================================================
+
+🟢 Case 2: -m flag से चलाना
+
+जब आप चलाते हो:
+
+python -m app.utils.recreate_db
+
+
+तो Python app को एक proper package मानकर run करता है।
+इस mode में:
+
+Python पहले आपके project root को sys.path में जोड़ देता है।
+
+अब from app.models.base import Base जैसे absolute imports आराम से काम करते हैं।
+
+ये तरीका production-level projects में standard है।
+
+
+--------------------
+
+🔑 Rule of Thumb
+
+अगर आप absolute imports (package-style imports) इस्तेमाल कर रहे हो → हमेशा -m से run करो।
+
+अगर आप relative imports (from ..models.base import Base) इस्तेमाल कर रहे हो → सीधे script run कर सकते हो।
+
+
+
+
+
+
+
+----------------------------------------------------------------
+
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+
+
+$env:PYTHONPATH = "$PWD/app"
+python app/utils/recreate_db.py
+
+
+$env:PYTHONPATH = "$PWD"
+python app/main.py
+
+
+---------------------------------------------------------------
+
+✅ Rule of Thumb
+
+Domain-critical, business-essential, infra-level → core/
+
+General-purpose helpers, non-domain, reusable snippets → utils/
