@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000';
+// const API_URL = 'http://localhost:8000';
+const API_URL = 'https://ocr-versions-1.onrender.com';
 
 // Create axios instance with base URL
 const api = axios.create({
